@@ -69,7 +69,7 @@ int main(){
 
 
     testQuicksort_Midpoint(arr1);
-    // testQuicksort_medianOfThree(arr2);
+    testQuicksort_medianOfThree(arr2);
     testInsertionSort(arr3);
     
 
@@ -135,20 +135,28 @@ int Partition_Three(int numbers[], int i, int k){
     bool done = false;
 
     int leftmost = numbers[i];
+  
     midpoint = numbers[(i+k)/2]; 
     int rightmost  = numbers[k];
     int temp[] = {leftmost, midpoint, rightmost};
-    Quicksort_midpoint(temp, 0, 2); //sort temp to find the median
 
+    for (int i =0; i < 3; i++){
+        for (int j = i; j<3;j++){
+            if (temp[i]<temp[j]){
+                swap(temp[i],temp[j]);
+            }
+        }
+    }
     if (leftmost == temp[1]){
-        pivot = i;
+        pivot = leftmost;
     }
     else if (midpoint == temp[1]){
-        pivot = (i+k)/2;
+        pivot = midpoint;
     }
     else{
-        pivot = k;
+        pivot = rightmost;
     }
+    
     
     l=i;
     h=k;
